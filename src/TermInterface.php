@@ -1,5 +1,5 @@
 <?php
-namespace Scheduler;
+namespace Riesenia\Scheduler;
 
 interface TermInterface
 {

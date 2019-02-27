@@ -1,5 +1,5 @@
 <?php
-namespace Scheduler;
+namespace Riesenia\Scheduler;
 
 class Scheduler
 {
@@ -8,8 +8,12 @@ class Scheduler
 
     public function __construct($_items, $_terms)
     {
-        $this->addItems($_items);
-        $this->addTerms($_terms);
+        foreach($_items as $item){
+            $this->addItem($item);
+        }
+        foreach($_terms as $term){
+            $this->addTerm($term);
+        }
     }
 
     public function schedule()
@@ -84,20 +88,16 @@ class Scheduler
         }
     }
 
-    public function addItems($items)
+    public function addItem($id)
     {
-        foreach ($items as $id) {
-            if (!array_key_exists($id, $this->items)) {
-                $this->items[$id] = [];
-            }
+        if (!array_key_exists($id, $this->items)) {
+            $this->items[$id] = [];
         }
     }
 
-    public function addTerms($terms)
+    public function addTerm(TermInterface $term)
     {
-        foreach ($terms as $term) {
-            $this->terms[] = $term;
-        }
+        $this->terms[] = $term;
     }
 
     public function getTerms(): array

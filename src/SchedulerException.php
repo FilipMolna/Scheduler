@@ -1,5 +1,5 @@
 <?php
-namespace Scheduler;
+namespace Riesenia\Scheduler;
 
 class SchedulerException extends \Exception
 {

@@ -21,9 +21,9 @@ $scheduler = new Scheduler($items, $terms);
 Items and Terms can be also added separately. All added terms have to implement *TermInterface*.
 
 ```php
-$scheduler->addItems([1, 2, 3, 4]);
+$scheduler->addItems(3);
 //adding terms (terms have to implement TermInterface)
-$scheduler->addTerms([$term1, $term2, $term3, $term4]);
+$scheduler->addTerms($term5);
 ```
 
 ## Schedule method
