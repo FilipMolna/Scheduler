@@ -7,10 +7,10 @@ class SchedulerException extends \Exception
 
     public function addConflictingTerms($terms)
     {
-        array_push($this->conflictingTerms, $terms);
+        $this->conflictingTerms[] = $terms;
     }
 
-    public function getConflictingTerms()
+    public function getConflictingTerms(): array
     {
         return $this->conflictingTerms;
     }

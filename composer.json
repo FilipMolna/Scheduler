@@ -1,0 +1,15 @@
+{
+    "require-dev": {
+        "phpspec/phpspec": "^5.1",
+        "rshop/php-cs-fixer-config": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.14"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Scheduler\\": "src/"
+        }
+    }
+}

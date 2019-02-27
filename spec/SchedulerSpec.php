@@ -83,7 +83,8 @@ class SchedulerSpec extends ObjectBehavior
         $this->schedule();
     }
 
-    public function it_checks_complex_solvable_schedule($term1, $term2, $term3, $term4, TermInterface $term5, TermInterface $term6, TermInterface $term7, TermInterface $term8, TermInterface $term9, TermInterface $term10, TermInterface $term11, TermInterface $term12, TermInterface $term13, TermInterface $term14, TermInterface $term15, TermInterface $term16, TermInterface $term17, TermInterface $term18, TermInterface $term19){
+    public function it_checks_complex_solvable_schedule($term1, $term2, $term3, $term4, TermInterface $term5, TermInterface $term6, TermInterface $term7, TermInterface $term8, TermInterface $term9, TermInterface $term10, TermInterface $term11, TermInterface $term12, TermInterface $term13, TermInterface $term14, TermInterface $term15, TermInterface $term16, TermInterface $term17, TermInterface $term18, TermInterface $term19)
+    {
         $items = [1, 2, 3, 4];
 
         $term1->getFrom()->willReturn(new \DateTimeImmutable('2019-01-01 01:00:00'));
@@ -180,7 +181,7 @@ class SchedulerSpec extends ObjectBehavior
         $term19->getTo()->willReturn(new \DateTimeImmutable('2019-01-01 22:00:00'));
         $term19->getLockedId()->willReturn(null);
         $term19->getItemId()->willReturn(null);
-        
+
         $this->addTerm($term5);
         $this->addTerm($term6);
         $this->addTerm($term7);
