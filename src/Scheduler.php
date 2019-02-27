@@ -8,45 +8,44 @@ class Scheduler
 
     public function __construct($_items, $_terms)
     {
-        foreach ($_items as $item) {
-            $this->addItem($item);
-        }
-
-        foreach ($_terms as $term) {
-            $this->addTerm($term);
-        }
+        $this->addItems($_items);
+        $this->addTerms($_terms);
     }
 
     public function schedule()
     {
-        //check overlaping locked terms
+        //checks overlaping locked terms
         foreach ($this->terms as $key => $term) {
             if ($term->getLockedId() && $term->getItemId() === null) {
                 $id = $term->getLockedId();
 
+                //checks terms with already locked terms to item
                 foreach ($this->items[$id] as $occupied_term) {
                     $e = new SchedulerException();
                     $occupied = $this->checkConflictingTerms($term, $occupied_term);
 
                     if ($occupied) {
                         $e->addConflictingTerms([$term, $occupied_term]);
-
+                        //if two terms overlap, throw exception
                         throw $e;
                     }
                 }
+                //if no terms overlap, add term to item, set item id to this term
                 $this->terms[$key]->setItemId($id);
                 array_push($this->items[$id], $term);
             }
         }
 
+        //checks not locked overlaping terms
         $e = new SchedulerException();
-        //check overlaping terms
+
         foreach ($this->terms as $key => $term) {
             if ($term->getLockedId()) {
                 continue;
             }
             $occupied = false;
 
+            //for each item checks already occupied terms with term
             foreach ($this->items as $k => $item) {
                 $occupied = false;
 
@@ -72,7 +71,7 @@ class Scheduler
         }
     }
 
-    public function checkConflictingTerms($term, $occupied_term): boolval
+    public function checkConflictingTerms($term, $occupied_term): bool
     {
         if ($term->getFrom() <= $occupied_term->getFrom() && $term->getTo() >= $occupied_term->getTo()) {
             return true;
@@ -85,15 +84,24 @@ class Scheduler
         }
     }
 
-    public function addItem(int $id)
+    public function addItems($items)
     {
-        if (!array_key_exists($id, $this->items)) {
-            $this->items[$id] = [];
+        foreach ($items as $id) {
+            if (!array_key_exists($id, $this->items)) {
+                $this->items[$id] = [];
+            }
         }
     }
 
-    public function addTerm(TermInterface $term)
+    public function addTerms($terms)
     {
-        $this->terms[] = $term;
+        foreach ($terms as $term) {
+            $this->terms[] = $term;
+        }
+    }
+
+    public function getTerms(): array
+    {
+        return $this->terms;
     }
 }

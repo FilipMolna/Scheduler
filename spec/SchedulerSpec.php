@@ -46,7 +46,7 @@ class SchedulerSpec extends ObjectBehavior
         $term3->setItemId(2)->shouldBeCalled();
         $term4->setItemId(2)->shouldBeCalled();
 
-        $this->addTerm($term5);
+        $this->addTerms([$term5]);
 
         $this->shouldThrow(SchedulerException::class)->duringSchedule();
     }
@@ -61,7 +61,7 @@ class SchedulerSpec extends ObjectBehavior
         $term2->setItemId(1)->shouldBeCalled();
         $term4->setItemId(2)->shouldBeCalled();
 
-        $this->addTerm($term5);
+        $this->addTerms([$term5]);
 
         $this->shouldThrow(SchedulerException::class)->duringSchedule();
     }
@@ -72,7 +72,7 @@ class SchedulerSpec extends ObjectBehavior
         $term5->getTo()->willReturn(new \DateTimeImmutable('2019-01-01 23:00:00'));
         $term5->getLockedId()->willReturn(null);
         $term5->getItemId()->willReturn(null);
-        $this->addTerm($term5);
+        $this->addTerms([$term5]);
 
         $term1->setItemId(1)->shouldBeCalled();
         $term2->setItemId(1)->shouldBeCalled();
@@ -182,24 +182,23 @@ class SchedulerSpec extends ObjectBehavior
         $term19->getLockedId()->willReturn(null);
         $term19->getItemId()->willReturn(null);
 
-        $this->addTerm($term5);
-        $this->addTerm($term6);
-        $this->addTerm($term7);
-        $this->addTerm($term8);
-        $this->addTerm($term9);
-        $this->addTerm($term10);
-        $this->addTerm($term11);
-        $this->addTerm($term12);
-        $this->addTerm($term13);
-        $this->addTerm($term14);
-        $this->addTerm($term15);
-        $this->addTerm($term16);
-        $this->addTerm($term17);
-        $this->addTerm($term18);
-        $this->addTerm($term19);
+        $this->addTerms([$term5]);
+        $this->addTerms([$term6]);
+        $this->addTerms([$term7]);
+        $this->addTerms([$term8]);
+        $this->addTerms([$term9]);
+        $this->addTerms([$term10]);
+        $this->addTerms([$term11]);
+        $this->addTerms([$term12]);
+        $this->addTerms([$term13]);
+        $this->addTerms([$term14]);
+        $this->addTerms([$term15]);
+        $this->addTerms([$term16]);
+        $this->addTerms([$term17]);
+        $this->addTerms([$term18]);
+        $this->addTerms([$term19]);
 
-        $this->addItem(3);
-        $this->addItem(4);
+        $this->addItems([3, 4]);
 
         $term1->setItemId(1)->shouldBeCalled();
         $term2->setItemId(2)->shouldBeCalled();
